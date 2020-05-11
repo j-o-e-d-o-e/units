@@ -7,7 +7,7 @@ export class MockData {
       surname: "Doe" ,
       phone: "666 666",
       friends: 3,
-      date: new Date(2020, 4, 5),
+      date: new Date(2020, 4, 5, 18),
       status: Status.left
     },
     {
@@ -15,7 +15,7 @@ export class MockData {
       surname: "" ,
       phone: "666 666",
       friends: 4,
-      date: new Date(2020, 4, 6),
+      date: new Date(2020, 4, 6, 16),
       status: Status.left
     },
     {
@@ -23,7 +23,7 @@ export class MockData {
       surname: "Doe" ,
       phone: "666 666",
       friends: 5,
-      date: new Date(2020, 4, 7),
+      date: new Date(2020, 4, 7, 20),
       status: Status.arrived
     },
     {
@@ -31,7 +31,7 @@ export class MockData {
       surname: "" ,
       phone: "666 666",
       friends: 3,
-      date: new Date(2020, 4, 8),
+      date: new Date(2020, 4, 8, 16),
       status: Status.arrived
     },
     {
@@ -39,7 +39,7 @@ export class MockData {
       surname: "Doe" ,
       phone: "666 666",
       friends: 4,
-      date: new Date(2020, 4, 9),
+      date: new Date(2020, 4, 9, 20),
       status: Status.booked
     },
     {
@@ -47,7 +47,7 @@ export class MockData {
       surname: "" ,
       phone: "666 666",
       friends: 5,
-      date: new Date(2020, 4, 10),
+      date: new Date(2020, 4, 10, 18),
       status: Status.booked
     }
   ];

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     password = this.form.value.password;
     this.auth.login(mail, password).then(
       () => {
-        this.router.navigate(['/available']).catch();
+        this.router.navigate(['/arrived']).catch();
       },
       () => {
         this.error = true;

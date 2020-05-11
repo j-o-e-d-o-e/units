@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="authenticated; else notAuthenticated">
-  <div class="navbar-brand">Seats</div>
+  <div class="navbar-brand">Tables</div>
   <button class="navbar-toggler" type="button" (click)="toggle()">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -18,7 +18,7 @@
 </nav>
 <ng-template #notAuthenticated>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="navbar-brand">Seats</div>
+    <div class="navbar-brand">Tables</div>
   </nav>
 </ng-template >
 

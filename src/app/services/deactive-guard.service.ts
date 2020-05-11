@@ -1,11 +1,11 @@
 import {CanDeactivate} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {AvailableComponent} from '../available/available.component';
+import {ArrivedComponent} from '../arrived/arrived.component';
 
 @Injectable()
-export class CanDeactivateGuard implements CanDeactivate<AvailableComponent> {
+export class CanDeactivateGuard implements CanDeactivate<ArrivedComponent> {
 
-  canDeactivate(component: AvailableComponent): boolean {
+  canDeactivate(component: ArrivedComponent): boolean {
     if (component.changed) {
       return confirm('Unsaved changes. Discard?');
     }

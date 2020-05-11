@@ -18,10 +18,11 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {AuthGuard} from './services/auth/auth-guard.service';
 import {CanDeactivateGuard} from './services/deactive-guard.service';
-import {AvailableComponent} from './available/available.component';
 import {DataService} from './services/data.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ModalContent} from './available/modal-content.component';
+import {ModalContent} from './arrived/modal-content.component';
+import {ArrivedComponent} from './arrived/arrived.component';
+import {AddComponent} from './add/add.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import {ModalContent} from './available/modal-content.component';
     FooterComponent,
     LoginComponent,
     SpinnerComponent,
-    AvailableComponent,
-    ModalContent
+    ModalContent,
+    ArrivedComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
