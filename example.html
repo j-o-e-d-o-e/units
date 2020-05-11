@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example</title>
+</head>
+<body>
+<h1>Freie Einheiten: <span id="units"></span></h1>
+<script type="text/javascript">
+  document.ready(fetchSeats());
+  function fetchSeats() {
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        console.log(JSON.parse(xmlHttp.response));
+        const resp = JSON.parse(xmlHttp.response)['-M6u8uivFdB2QlFZPt4T'];
+        const units = document.getElementById('units');
+        units.innerText = resp.filter(unit => unit.used).length;
+      }
+    };
+    xmlHttp.open("GET", "https://unit-counter-6717e.firebaseio.com/units.json", true);
+    xmlHttp.send(null);
+  }
+</script>
+</body>
+</html>
