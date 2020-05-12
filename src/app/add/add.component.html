@@ -1,0 +1,71 @@
+<div class="container">
+
+  <!--TODO: CanDeactiveGuard for alert "data will be lost" -->
+  <!--<div class="col-xs-10 alert alert-danger" *ngIf="user.voted && form.dirty">-->
+  <!--<p>Submit to update vote.</p>-->
+  <!--</div>-->
+
+  <div class="row">
+    <h2>New Guest</h2>
+  </div>
+
+  <div class="row" *ngIf="success">
+    <div class="col-md-10 alert alert-success">
+      <p>Updated successfully.</p>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="error">
+    <div class="col-md-10 alert alert-danger">
+      <p>Update failed.</p>
+    </div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <div class="row">
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="forename">Forename</label>
+          <input id="forename" class="form-control" type="text" name="forename" ngModel required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="surname">Surname</label>
+          <input id="surname" class="form-control" type="text" name="surname" ngModel>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" class="form-control" type="text" name="phone" ngModel>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="friends">Friends</label>
+          <input id="friends" class="form-control" type="number" name="friends" ngModel>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-success" [disabled]="form.invalid"> Submit</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+    </div>
+
+  </form>
+</div>
