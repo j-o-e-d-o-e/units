@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DataService} from '../services/data.service';
+import {DataService} from '../../services/data.service';
 import {NgForm} from '@angular/forms';
-import {Guest, Status} from '../model/guest.model';
+import {Guest, Status} from '../../model/guest.model';
 import {Location} from '@angular/common';
 
 @Component({

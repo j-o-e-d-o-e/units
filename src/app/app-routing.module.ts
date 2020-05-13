@@ -4,7 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './services/auth/auth-guard.service';
 import {CanDeactivateGuard} from './services/deactive-guard.service';
 import {ArrivedComponent} from './arrived/arrived.component';
-import {AddComponent} from './add/add.component';
+import {AddComponent} from './arrived/add/add.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
