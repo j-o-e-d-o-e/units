@@ -6,9 +6,9 @@ import {ArrivedComponent} from '../arrived/arrived.component';
 export class CanDeactivateGuard implements CanDeactivate<ArrivedComponent> {
 
   canDeactivate(component: ArrivedComponent): boolean {
-    if (component.changed) {
-      return confirm('Unsaved changes. Discard?');
-    }
+    // if (component.changed) {
+    //   return confirm('Unsaved changes. Discard?');
+    // }
     return true;
   }
 }
