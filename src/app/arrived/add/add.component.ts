@@ -40,7 +40,7 @@ export class AddComponent implements OnInit {
     }).catch(() => {
       this.error = true;
       setTimeout(() => {
-          this.success = false;
+          this.error = false;
         }, 1000
       );
     });

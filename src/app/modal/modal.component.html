@@ -1,0 +1,90 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <div class="modal-header">
+    <h6 class="modal-title">Edit</h6>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="row" *ngIf="success">
+      <div class="col-md-10 alert alert-success">
+        <p>Updated successfully.</p>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="error">
+      <div class="col-md-10 alert alert-danger">
+        <p>Update failed.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="forename">Forename</label>
+          <input id="forename" class="form-control" type="text" name="forename" [ngModel]="(guest | async)?.forename"
+                 required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="surname">Surname</label>
+          <input id="surname" class="form-control" type="text" name="surname" [ngModel]="(guest | async)?.surname">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <p>Date</p>
+        <input id="date" type="date" name="date" [ngModel]="(guest | async)?.date | date: 'yyyy-MM-dd'">
+        <ngb-timepicker id="time" name="time" [minuteStep]="30" [seconds]="false" [(ngModel)]="time"></ngb-timepicker>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <p>Status</p>
+        <label class="radio" *ngFor="let value of ['arrived', 'booked']">
+          <input type="radio" name="status" [value]="true" [checked]="(guest | async)?.status === value"
+                 [ngModel]="status">
+          <span class="radio-span"> {{value}} </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" class="form-control" type="text" name="phone" [ngModel]="(guest | async)?.phone">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="friends">Friends</label>
+          <input id="friends" class="form-control" type="number" name="friends" [ngModel]="(guest | async)?.friends">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-free" *ngIf="(guest | async)?.status !== 'arrived'" (click)="arrived()">
+      Arrived
+    </button>
+    <button type="button" class="btn btn-danger" *ngIf="(guest | async)?.status !== 'reserved'" (click)="remove()">
+      Remove
+    </button>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">Cancel</button>
+  </div>
+</form>

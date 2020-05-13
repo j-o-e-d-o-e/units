@@ -3,10 +3,6 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {Guest} from '../model/guest.model';
 import {map} from 'rxjs/operators';
 
-export interface GuestDb extends Guest {
-  id: string;
-}
-
 @Injectable()
 export class DataService {
   private collection: AngularFirestoreCollection<Guest>;
@@ -38,12 +34,12 @@ export class DataService {
     return this.collection.add(value);
   }
 
-  updateOne(data: string, value: GuestDb) {
-    this.collection.doc(value.id).set(value).then();
+  updateOne(data: string, id: string, value: any) {
+    return this.db.doc(data + '/' + id).update(value);
   }
 
-  removeOne(data: string, id: string) {
-    this.db.doc(data + '/' + id).delete().then();
+  deleteOne(data: string, id: string) {
+    return this.db.doc(data + '/' + id).delete();
   }
 
   // noinspection JSUnusedGlobalSymbols FOR MOCK-DATA

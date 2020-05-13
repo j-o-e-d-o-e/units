@@ -19,9 +19,9 @@ import {AuthGuard} from './services/auth/auth-guard.service';
 import {CanDeactivateGuard} from './services/deactive-guard.service';
 import {DataService} from './services/data.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ModalContent} from './arrived/modal-content.component';
 import {ArrivedComponent} from './arrived/arrived.component';
 import {AddComponent} from './arrived/add/add.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +30,9 @@ import {AddComponent} from './arrived/add/add.component';
     FooterComponent,
     LoginComponent,
     SpinnerComponent,
-    ModalContent,
     ArrivedComponent,
-    AddComponent
+    AddComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +47,7 @@ import {AddComponent} from './arrived/add/add.component';
   ],
   providers: [AuthService, AuthGuard, CanDeactivateGuard, DataService],
   bootstrap: [AppComponent],
-  entryComponents: [ModalContent]
+  entryComponents: [ModalComponent]
 })
 export class AppModule {
 }
