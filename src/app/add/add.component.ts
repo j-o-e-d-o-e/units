@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {DataService} from '../../services/data.service';
+import {Component, ViewChild} from '@angular/core';
+import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
-import {Guest, Status} from '../../model/guest.model';
+import {Guest, Status} from '../model/guest.model';
 import {Location} from '@angular/common';
 
 @Component({
@@ -9,16 +9,14 @@ import {Location} from '@angular/common';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
-export class AddComponent implements OnInit {
+export class AddComponent {
   @ViewChild('form')
   form: NgForm;
   success: boolean;
   error: boolean;
+  time: { hour: number, minute: number };
 
   constructor(private data: DataService, private location: Location) {
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {

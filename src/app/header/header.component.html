@@ -4,11 +4,17 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse mr-auto" [ngClass]="{ 'show': open }">
-<!--    <ul class="navbar-nav mr-auto">-->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/arrived" (click)="open=false">Arrived</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/booked" (click)="open=false">Booked</a>
+      </li>
 <!--      <li class="nav-item">-->
-<!--        <a class="nav-link" routerLinkActive="active" routerLink="/total" (click)="open=false">Total</a>-->
+<!--        <a class="nav-link" routerLinkActive="active" routerLink="/records" (click)="open=false">Records</a>-->
 <!--      </li>-->
-<!--    </ul>-->
+    </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/logout" (click)="open=false">Logout</a>

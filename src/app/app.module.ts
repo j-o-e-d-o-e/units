@@ -20,8 +20,10 @@ import {CanDeactivateGuard} from './services/deactive-guard.service';
 import {DataService} from './services/data.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ArrivedComponent} from './arrived/arrived.component';
-import {AddComponent} from './arrived/add/add.component';
+import {AddComponent} from './add/add.component';
 import { ModalComponent } from './modal/modal.component';
+import { BookedComponent } from './booked/booked.component';
+import { AddBookedComponent } from './add-booked/add-booked.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ModalComponent } from './modal/modal.component';
     SpinnerComponent,
     ArrivedComponent,
     AddComponent,
-    ModalComponent
+    ModalComponent,
+    BookedComponent,
+    AddBookedComponent,
   ],
   imports: [
     BrowserModule,

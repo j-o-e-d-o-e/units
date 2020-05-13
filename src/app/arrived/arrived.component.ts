@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {Status, Guest} from '../model/guest.model';
+import {Guest, Status} from '../model/guest.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
@@ -29,7 +29,7 @@ export class ArrivedComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['/new']).catch();
+    this.router.navigate(['/arrived-new']).catch();
   }
 
   onEdit(id: string) {
@@ -45,7 +45,7 @@ export class ArrivedComponent implements OnInit {
         });
       })).subscribe(ids => {
         ids.forEach((id: string, index: number, array: string[]) => {
-          this.data.deleteOne('guests', id);
+          this.data.deleteOne('guests', id).then();
           if (index === array.length - 1 && this.guests.subscribe(res => res.length === 0)) {
             this.success = true;
             setTimeout(() => {
