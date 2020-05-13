@@ -78,11 +78,11 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-free" *ngIf="(guest | async)?.status !== 'arrived'" (click)="arrived()">
-      Arrived
-    </button>
     <button type="button" class="btn btn-danger" *ngIf="(guest | async)?.status !== 'reserved'" (click)="remove()">
       Remove
+    </button>
+    <button type="button" class="btn btn-outline-dark" *ngIf="(guest | async)?.status !== 'arrived'" (click)="arrived()">
+      Arrived
     </button>
     <button type="submit" class="btn btn-success">Submit</button>
     <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">Cancel</button>
