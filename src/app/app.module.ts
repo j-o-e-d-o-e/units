@@ -5,16 +5,15 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {FooterComponent} from './footer/footer.component';
 import {TooltipModule} from 'ng2-tooltip-directive';
 import {LoginComponent} from './login/login.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {AngularFireModule} from 'angularfire2';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {environment} from '../environments/environment';
 import {AuthService} from './services/auth/auth.service';
-import {AngularFireAuthModule} from 'angularfire2/auth';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {AuthGuard} from './services/auth/auth-guard.service';
 import {CanDeactivateGuard} from './services/deactive-guard.service';
@@ -38,11 +37,10 @@ import {AddComponent} from './add/add.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    HttpClientModule,
     AngularFontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     TooltipModule,
     AppRoutingModule,
     NgbModule

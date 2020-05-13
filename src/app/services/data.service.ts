@@ -1,74 +1,68 @@
-import {Injectable, OnInit} from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
-import {Guest} from '../model/guest.model';
+import {Guest, Status} from '../model/guest.model';
 import {map} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
+
+export interface GuestDb extends Guest {
+  id: string;
+}
 
 @Injectable()
-export class DataService implements OnInit {
-  private key: string;
-  public val: any;
-  private guests: AngularFireList<unknown>;
-  private guests1: Observable<unknown[]>;
-  private resp: Observable<any>;
-  private resp1: any;
+export class DataService {
+  private collection: AngularFirestoreCollection<Guest>;
+  private doc: AngularFirestoreDocument<Guest>;
 
-  constructor(private db: AngularFireDatabase, private firestore: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
   }
 
-  ngOnInit(): void {
-    // this.guests1 = this.db.list('guests').valueChanges();
-    // this.guests = this.db.list('guests');
+  fetchOne(data: string, id: string) {
+    this.doc = this.db.doc(data + '/' + id);
+    return this.doc.valueChanges();
   }
 
-  fetch(data: string) {
-    return this.db.list(data).snapshotChanges().pipe(
-      map((resp: any[]) => resp.map(resp => {
-        this.key = resp.key;
-        return resp.payload.val();
-      }))
-    );
-  }
-
-  fetch1() {
-    return this.db.list('guests').snapshotChanges().pipe(
-      map((resp: any[]) => resp.map(resp => {
-        this.resp1 = resp;
-        this.key = resp.key;
-        this.resp = resp.payload.val();
-        this.resp.subscribe()
-      }))
-    );
-  }
-
-  update(data: string, values: Guest[]) {
-    return this.db.list(data).set(this.key, values.map(value => {
-      return DataService.dateToString(value);
+  fetchMany(data: string, status: string) {
+    this.collection = this.db.collection(data, ref => ref.where('status', '==', status));
+    return this.collection.snapshotChanges().pipe(map(resp => {
+      return resp.map(props => {
+        return {
+          id: props.payload.doc.id,
+          data: props.payload.doc.data()
+        };
+      }).sort(((a, b) => {
+        if (a.data.date > b.data.date) {
+          return 1;
+        } else if (a.data.date < b.data.date) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }));
     }));
   }
 
-  save(data: string, values: Guest[]) {
-    return this.db.list(data).push(values.map(value => {
-      return DataService.dateToString(value);
-    }));
+  addOne(data: string, value: Guest) {
+    return this.collection.add(value);
   }
 
-  push(data: string, value: Guest) {
-    // return this.http.post(environment.firebase.databaseURL + 'guests', value);
-
-    return this.db.list(data).push(value);
-    // return this.guests.push({ content: value, done: false });
+  addMany(data: string, values: Guest[]) {
+    for (let value of values) {
+      this.collection.add(value)
+        .then(() => console.log('done.'))
+        .catch(() => console.log('failed.'));
+    }
   }
 
-  private static dateToString(value: Guest) {
-    return {
-      forename: value.forename,
-      surname: value.surname,
-      phone: value.phone,
-      friends: value.friends,
-      date: value.date.toLocaleString('de-DE'),
-      status: value.status
-    };
+  update(data: string, value: GuestDb) {
+    this.collection.doc(value.id).set(value).then();
+  }
+
+  removeOne(data: string, id: string) {
+    this.db.doc(data + '/' + id).delete().then();
+  }
+
+  removeMany(data: string, ids: string[]) {
+    for (let id of ids) {
+      this.db.doc(data + '/' + id).delete().then();
+    }
   }
 }

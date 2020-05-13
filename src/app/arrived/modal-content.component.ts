@@ -1,26 +1,28 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Status, Guest} from '../model/guest.model';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">{{guest.forename + guest.surname}}</h4>
-      <!--      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
-      <!--        <span aria-hidden="true">&times;</span>-->
-      <!--      </button>-->
+      <h4 class="modal-title">
+        {{(guest | async)?.forename + (guest | async)?.surname}}
+        <span class="h6">{{(guest | async)?.status}}</span>
+      </h4>
     </div>
     <div class="modal-body">
-      <p>Date: {{guest.date}} - Status: {{guest.status}}</p>
-      <p>Phone: {{guest.phone}} - Friends: {{guest.friends}}</p>
+      <p>Date: {{(guest | async)?.date | date: 'H:mm, dd.MM.yy'}}</p>
+      <p>Phone: {{(guest| async)?.phone}}</p>
+      <p>Friends: {{(guest | async)?.friends}}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-free" *ngIf="guest.status !== 'arrived'" (click)="arrived()">Arrived</button>
-      <button type="button" class="btn btn-reserve" *ngIf="guest.status !== 'reserved'" (click)="left()">Left</button>
-      <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Cancel</button>
+      <button type="button" class="btn btn-free" *ngIf="(guest | async)?.status !== 'arrived'" (click)="arrived()">Arrived</button>
+      <button type="button" class="btn btn-danger" *ngIf="(guest | async)?.status !== 'reserved'" (click)="remove()">Remove</button>
+      <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">Cancel</button>
     </div>
   `,
   styles: ['.btn-arrived, .btn-left, .btn-use {margin-right: 10px}',
@@ -29,24 +31,27 @@ import {Router} from '@angular/router';
     '.btn-use{background-color: #82FF35; color: white}',
   ]
 })
-export class ModalContent {
+export class ModalContent implements OnInit{
   @Input()
-  guest: Guest;
-  subject = new Subject();
+  private id: string;
+  guest: Observable<Guest>;
 
-  constructor(public activeModal: NgbActiveModal, private router: Router) {
+  constructor(public activeModal: NgbActiveModal, private router: Router, private data:DataService) {
+  }
+
+  ngOnInit(): void {
+    this.guest = this.data.fetchOne('guests', this.id);
   }
 
   arrived() {
-    this.guest.status = Status.arrived;
-    this.subject.next();
+    console.log(this.guest);
+    // this.guest.status = Status.arrived;
+    // this.subject.next();
     this.activeModal.close('Close click');
   }
 
-  left() {
-    this.guest.status = Status.left;
-    this.subject.next();
-    // this.router.navigate(['/left']);
+  remove() {
+    this.data.removeOne('guests', this.id);
     this.activeModal.close('Close click');
   }
 }

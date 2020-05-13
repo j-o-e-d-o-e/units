@@ -24,7 +24,7 @@
 
     <div class="row btn-toolbar">
       <div class="mr-auto">
-        <h2>Currently: {{arrivedGuests.length}}</h2>
+        <h2>Currently: {{(guests| async)?.length}}</h2>
       </div>
       <div class="ml-auto">
         <button type="submit" class="btn btn-success" (click)="onAdd()">Add</button>
@@ -45,13 +45,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let guest of arrivedGuests; let i = index">
-              <td>{{guest.date.toLocaleString('de')}}</td>
-              <td>{{guest.forename}} {{guest.surname}}</td>
-              <td>{{guest.phone}}</td>
-              <td>{{guest.friends}}</td>
+            <tr *ngFor="let guest of guests | async">
+              <td>{{guest.data.date | date: 'H:mm, dd.MM.yy'}}</td>
+              <td>{{guest.data.forename}} {{guest.data.surname}}</td>
+              <td>{{guest.data.phone}}</td>
+              <td>{{guest.data.friends}}</td>
               <td>
-                <button type="button" class="btn btn-primary" (click)="onEdit(i)"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-primary" (click)="onEdit(guest.id)"><i class="fa fa-pencil"></i>
+                </button>
               </td>
             </tr>
             </tbody>
