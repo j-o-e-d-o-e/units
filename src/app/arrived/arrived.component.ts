@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {ModalComponent} from '../modal/modal.component';
+import {SettingsService} from '../services/settings.service';
 
 
 @Component({
@@ -15,15 +16,18 @@ import {ModalComponent} from '../modal/modal.component';
 })
 export class ArrivedComponent implements OnInit {
   guests: Observable<{ data: Guest; id: string }[]>;
+  display: boolean;
   loading: boolean;
   success: boolean;
   error: boolean;
 
-  constructor(private data: DataService, private router: Router, private modalService: NgbModal) {
+  constructor(private data: DataService, private settings: SettingsService,
+              private router: Router, private modalService: NgbModal) {
   }
 
   ngOnInit() {
     this.loading = true;
+    this.settings.fetch().subscribe(settings => this.display = settings.display);
     this.guests = this.data.fetchMany('guests', Status.arrived);
     this.loading = false;
   }

@@ -4,7 +4,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FormsModule} from '@angular/forms';
-import {FooterComponent} from './footer/footer.component';
 import {TooltipModule} from 'ng2-tooltip-directive';
 import {LoginComponent} from './login/login.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
@@ -32,7 +31,6 @@ import {SettingsService} from './services/settings.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     LoginComponent,
     SpinnerComponent,
     ArrivedComponent,

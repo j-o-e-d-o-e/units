@@ -1,12 +1,4 @@
-<div class="container">
-
-  <div class="row" *ngIf="loading">
-    <div class="col">
-      <div class="text-center">
-        <app-spinner></app-spinner>
-      </div>
-    </div>
-  </div>
+<div class="container" *ngIf="!loading">
 
   <div class="row" *ngIf="success">
     <div class="col-md-10 alert alert-success">
@@ -20,16 +12,16 @@
     </div>
   </div>
 
-  <div *ngIf="!loading">
-
-    <div class="row btn-toolbar">
-      <div class="mr-auto">
-        <h2>Arrived: {{(guests| async)?.length}}</h2>
-      </div>
-      <div class="ml-auto">
-        <button type="submit" class="btn btn-success" (click)="onAdd()">Add</button>
-      </div>
+  <div class="row btn-toolbar">
+    <div class="mr-auto">
+      <h2>Arrived: {{(guests| async)?.length}}</h2>
     </div>
+    <div class="ml-auto">
+      <button type="submit" class="btn btn-success" (click)="onAdd()">Add</button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="display">
 
     <div class="row">
       <div class="col">
@@ -66,5 +58,7 @@
         <button type="button" class="btn btn-danger" (click)="onClear()">Clear all</button>
       </div>
     </div>
-  </div>
+
+  </ng-container>
+
 </div>
