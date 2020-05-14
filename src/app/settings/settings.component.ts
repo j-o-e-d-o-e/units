@@ -10,7 +10,6 @@ import {Settings} from '../model/settings.model';
 })
 export class SettingsComponent implements OnInit {
   settings: Settings;
-  loading: boolean;
   success: boolean;
   error: boolean;
 
@@ -18,10 +17,8 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
     this.data.fetch().subscribe(settings => {
       this.settings = settings;
-      this.loading = false;
     });
   }
 

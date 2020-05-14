@@ -14,7 +14,6 @@ import {map} from 'rxjs/operators';
 })
 export class BookedComponent implements OnInit {
   guests: Observable<{ data: Guest; id: string }[]>;
-  loading: boolean;
   success: boolean;
   error: boolean;
 
@@ -22,9 +21,7 @@ export class BookedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
     this.guests = this.data.fetchMany('guests', Status.booked);
-    this.loading = false;
   }
 
   onAdd() {
@@ -51,6 +48,12 @@ export class BookedComponent implements OnInit {
                 this.success = false;
               }, 1000
             );
+          } else {
+            this.error = true;
+            setTimeout(() => {
+                this.error = false;
+              }, 2000
+            );
           }
         });
       });
@@ -70,8 +73,14 @@ export class BookedComponent implements OnInit {
             this.success = true;
             setTimeout(() => {
                 this.success = false;
-              this.router.navigate(['/arrived']).catch();
+                this.router.navigate(['/arrived']).catch();
               }, 1000
+            );
+          } else {
+            this.error = true;
+            setTimeout(() => {
+                this.error = false;
+              }, 2000
             );
           }
         });

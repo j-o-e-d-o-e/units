@@ -17,7 +17,6 @@ import {SettingsService} from '../services/settings.service';
 export class ArrivedComponent implements OnInit {
   guests: Observable<{ data: Guest; id: string }[]>;
   display: boolean;
-  loading: boolean;
   success: boolean;
   error: boolean;
 
@@ -26,10 +25,8 @@ export class ArrivedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
     this.settings.fetch().subscribe(settings => this.display = settings.display);
     this.guests = this.data.fetchMany('guests', Status.arrived);
-    this.loading = false;
   }
 
   onAdd() {
@@ -54,7 +51,13 @@ export class ArrivedComponent implements OnInit {
             this.success = true;
             setTimeout(() => {
                 this.success = false;
-              }, 1000
+              }, 3000
+            );
+          } else {
+            this.error = true;
+            setTimeout(() => {
+                this.error = false;
+              }, 3000
             );
           }
         });

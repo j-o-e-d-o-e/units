@@ -14,9 +14,9 @@ import {DataService} from '../services/data.service';
 export class ModalComponent implements OnInit, OnDestroy {
   @Input()
   private id: string;
-  guest: Observable<Guest>;
   @ViewChild('form')
   form: NgForm;
+  guest: Observable<Guest>;
   time: { hour: number, minute: number };
   status: Status;
   success: boolean;
