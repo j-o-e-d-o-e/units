@@ -45,18 +45,25 @@
 
     <div class="row" *ngIf="field === 'date'">
       <div class="col-md-5">
-        <p>Date</p>
+        <label for="date">Date</label>
         <div class="row">
-          <div class="col-md-5">
-            <label class="radio" *ngFor="let value of ['less than', 'greater than']">
-              <input class="radio-span" type="radio" name="rel" [value]="true"
-                     [ngModel]="rel">
-              <span class="radio-span">{{value}} </span>
+          <div class="col">
+            <label class="radio-inline">
+              <input type="radio" value="<" name="opStr" [(ngModel)]="opStr">
+              <span class="radio-span">Less than</span>
+            </label>
+            <label class="radio-inline">
+              <input type="radio" value="==" name="opStr" [(ngModel)]="opStr">
+              <span class="radio-span">Equals</span>
+            </label>
+            <label class="radio-inline">
+              <input type="radio" value=">" name="opStr" [(ngModel)]="opStr">
+              <span class="radio-span">Greater than</span>
             </label>
           </div>
         </div>
         <input id="date" class="form-control" type="date" name="date" [ngModel]="(date | date: 'yyyy-MM-dd')">
-        <ngb-timepicker id="time" name="time" [minuteStep]="30" [seconds]="false" [(ngModel)]="time"></ngb-timepicker>
+        <ngb-timepicker *ngIf="opStr !== '=='" id="time" name="time" [minuteStep]="30" [seconds]="false" [(ngModel)]="time"></ngb-timepicker>
       </div>
     </div>
 

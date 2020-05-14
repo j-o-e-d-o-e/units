@@ -5,21 +5,22 @@ import {map} from 'rxjs/operators';
 
 @Injectable()
 export class SearchService {
+  private path = 'guests';
   private collection: AngularFirestoreCollection<Guest>;
 
   constructor(private db: AngularFirestore) {
   }
 
-  searchByOneField(data: string, field: string, value: string) {
-    this.collection = this.db.collection(data, ref => {
+  searchByOneField(field: string, value: string) {
+    this.collection = this.db.collection(this.path, ref => {
       return ref.where(field, '==', value)
         .orderBy('date', 'desc');
     });
     return this.data();
   }
 
-  searchByName(data: string, forename: string, surname: string) {
-    this.collection = this.db.collection(data, ref => {
+  searchByName(forename: string, surname: string) {
+    this.collection = this.db.collection(this.path, ref => {
       return ref.where('forename', '==', forename)
         .where('surname', '==', surname)
         .orderBy('date', 'desc');
@@ -27,9 +28,18 @@ export class SearchService {
     return this.data();
   }
 
-  searchByDate(data: string, date: number, rel: any) {
-    this.collection = this.db.collection(data, ref => {
+  searchByDate(date: number, rel: any) {
+    this.collection = this.db.collection(this.path, ref => {
       return ref.where('date', rel, date)
+        .orderBy('date', 'desc');
+    });
+    return this.data();
+  }
+
+  searchByDay(date: number) {
+    this.collection = this.db.collection(this.path, ref => {
+      return ref.where('date', '>=', date)
+        .where('date', '<=', date + 24 * 60 * 60)
         .orderBy('date', 'desc');
     });
     return this.data();
