@@ -10,15 +10,18 @@ import {Subscription} from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   open = false;
   authenticated: boolean;
-  subscription: Subscription;
+  authSubscription: Subscription;
+  admin: boolean;
+  adminSubscription: Subscription;
 
   constructor(private auth: AuthService) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.auth.authenticatedChanged.subscribe(
+    this.authSubscription = this.auth.authenticatedChanged.subscribe(
       (authenticated: boolean) => this.authenticated = authenticated);
-    this.authenticated = this.auth.isAuthenticated();
+    this.adminSubscription = this.auth.adminChanged.subscribe(
+      (admin: boolean) => this.admin = admin);
   }
 
   toggle() {
@@ -26,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.adminSubscription.unsubscribe();
   }
 }

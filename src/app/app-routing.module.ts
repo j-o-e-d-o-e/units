@@ -8,14 +8,16 @@ import {BookedComponent} from './booked/booked.component';
 import {AddComponent} from './add/add.component';
 import {AddBookedComponent} from './add-booked/add-booked.component';
 import {RecordsComponent} from './records/records.component';
+import {SettingsComponent} from './settings/settings.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'arrived', component: ArrivedComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuard]},
-  {path: 'arrived-new', component: AddComponent, canActivate: [AuthGuard]},
+  {path: 'arrived', component: ArrivedComponent, canActivate: [AuthGuard]},
+  {path: 'arrived-new', component: AddComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuard]},
   {path: 'booked', component: BookedComponent, canActivate: [AuthGuard]},
-  {path: 'booked-new', component: AddBookedComponent, canActivate: [AuthGuard]},
+  {path: 'booked-new', component: AddBookedComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuard]},
   {path: 'records', component: RecordsComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'logout', component: LoginComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

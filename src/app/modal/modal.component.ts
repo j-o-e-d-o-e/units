@@ -73,8 +73,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.form);
-    this.guest.subscribe(g => console.log(g));
     this.data.updateOne('guests', this.id, {
       forename: this.form.value.forename,
       surname: this.form.value.surname,

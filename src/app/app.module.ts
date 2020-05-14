@@ -25,6 +25,8 @@ import { ModalComponent } from './modal/modal.component';
 import { BookedComponent } from './booked/booked.component';
 import { AddBookedComponent } from './add-booked/add-booked.component';
 import { RecordsComponent } from './records/records.component';
+import { SettingsComponent } from './settings/settings.component';
+import {SettingsService} from './services/settings.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { RecordsComponent } from './records/records.component';
     BookedComponent,
     AddBookedComponent,
     RecordsComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,7 @@ import { RecordsComponent } from './records/records.component';
     AppRoutingModule,
     NgbModule
   ],
-  providers: [AuthService, AuthGuard, CanDeactivateGuard, DataService, SearchService],
+  providers: [AuthService, AuthGuard, CanDeactivateGuard, DataService, SearchService, SettingsService],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })

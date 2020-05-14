@@ -1,0 +1,64 @@
+<div class="container" *ngIf="!loading">
+
+  <!--TODO: CanDeactiveGuard for alert "data will be lost" -->
+  <!--<div class="col-xs-10 alert alert-danger" *ngIf="user.voted && form.dirty">-->
+  <!--<p>Submit to update vote.</p>-->
+  <!--</div>-->
+
+  <div class="row">
+    <h2>Settings</h2>
+  </div>
+
+  <div class="row" *ngIf="success">
+    <div class="col-md-10 alert alert-success">
+      <p>Updated successfully.</p>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="error">
+    <div class="col-md-10 alert alert-danger">
+      <p>Update failed.</p>
+    </div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="display">Display list of arrived guests?</label>
+          <input id="display" class="form-control" type="checkbox" name="display"
+                 [(ngModel)]="settings.display">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="auto-delete">Auto-delete records?</label>
+          <input id="auto-delete" class="form-control" type="checkbox" name="auto-delete"
+                 [(ngModel)]="settings.autodelete">
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="settings.autodelete">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="days">After how many days auto-delete?</label>
+          <input id="days" class="form-control" type="number" name="days"
+                 [(ngModel)]="settings.days">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-success" [disabled]="!form.dirty">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+    </div>
+
+  </form>
+</div>

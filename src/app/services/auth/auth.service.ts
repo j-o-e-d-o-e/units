@@ -2,11 +2,14 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
   private token: string;
   public authenticatedChanged = new Subject<boolean>();
+  private admin: boolean;
+  public adminChanged = new Subject<boolean>();
 
   constructor(private router: Router, private afAuth: AngularFireAuth) {
   }
@@ -18,6 +21,10 @@ export class AuthService {
           this.token = token;
           this.authenticatedChanged.next(true);
         });
+        if (this.afAuth.auth.currentUser.uid === environment.admin) {
+          this.admin = true;
+          this.adminChanged.next(true);
+        }
       })
       .catch(error => {
         throw new Error(error);
@@ -29,6 +36,8 @@ export class AuthService {
       .then(() => {
         this.token = null;
         this.authenticatedChanged.next(false);
+        this.admin = false;
+        this.adminChanged.next(false);
       })
       .catch(error => {
         throw new Error(error);
@@ -37,5 +46,9 @@ export class AuthService {
 
   isAuthenticated() {
     return this.token != null;
+  }
+
+  isAdmin() {
+    return this.admin;
   }
 }
