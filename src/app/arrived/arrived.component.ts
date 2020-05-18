@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {ModalComponent} from '../modal/modal.component';
 import {SettingsService} from '../services/settings.service';
+import {AuthService} from '../services/auth/auth.service';
 
 
 @Component({
@@ -20,12 +21,18 @@ export class ArrivedComponent implements OnInit {
   success: boolean;
   error: boolean;
 
-  constructor(private data: DataService, private settings: SettingsService,
+  constructor(private data: DataService, private settings: SettingsService, private auth: AuthService,
               private router: Router, private modalService: NgbModal) {
   }
 
   ngOnInit() {
-    this.settings.fetch().subscribe(settings => this.display = settings.display);
+    this.settings.fetch().subscribe(settings => {
+      if (this.auth.isAdmin()){
+        this.display = settings.display;
+      }else {
+        this.display = settings.display_users;
+      }
+    });
     this.guests = this.data.fetchMany('guests', Status.arrived);
   }
 

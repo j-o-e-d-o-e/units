@@ -3,8 +3,8 @@ import {Observable, Subscription} from 'rxjs';
 import {Guest, Status} from '../model/guest.model';
 import {NgForm} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
 import {DataService} from '../services/data.service';
+import {RecordsService} from '../services/records.service';
 
 @Component({
   selector: 'app-modal',
@@ -23,7 +23,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   error: boolean;
   private subscription: Subscription;
 
-  constructor(public activeModal: NgbActiveModal, private router: Router, private data: DataService) {
+  constructor(public activeModal: NgbActiveModal, private data: DataService,
+              private records: RecordsService) {
   }
 
   ngOnInit(): void {
@@ -39,17 +40,31 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.data.updateOne('guests', this.id, {
       status: Status.arrived
     }).then(() => {
-      this.success = true;
-      setTimeout(() => {
-          this.success = false;
-          this.activeModal.close('Close click');
-        }, 1000
-      );
+      this.records.addOne('records', {
+        forename: this.form.value.forename,
+        surname: this.form.value.surname,
+        phone: this.form.value.phone,
+        friends: +this.form.value.friends,
+        date: this.date(),
+        status: this.status
+      }).then(() => {
+        this.success = true;
+        setTimeout(() => {
+            this.success = false;
+          }, 1000
+        );
+      }).catch(() => {
+        this.error = true;
+        setTimeout(() => {
+            this.error = false;
+          }, 3000
+        );
+      });
     }).catch(() => {
       this.error = true;
       setTimeout(() => {
           this.error = false;
-        }, 1000
+        }, 3000
       );
     });
   }
@@ -67,7 +82,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.error = true;
       setTimeout(() => {
           this.error = false;
-        }, 1000
+        }, 3000
       );
     });
   }
@@ -91,7 +106,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.error = true;
       setTimeout(() => {
           this.error = false;
-        }, 1000
+        }, 3000
       );
     });
   }
@@ -99,6 +114,17 @@ export class ModalComponent implements OnInit, OnDestroy {
   private date() {
     const date = new Date(this.form.value.date);
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), this.time.hour, this.time.minute).getTime();
+  }
+
+
+  onCancel() {
+    if (this.form.dirty) {
+      if (confirm('Unsaved changes. Discard?')) {
+        this.activeModal.close('Close click');
+      }
+    } else {
+      this.activeModal.close('Close click');
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,15 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {SettingsService} from '../services/settings.service';
 import {Settings} from '../model/settings.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
+
 export class SettingsComponent implements OnInit {
+  @ViewChild('form')
+  form: NgForm;
   settings: Settings;
+  loading: boolean;
   success: boolean;
   error: boolean;
 
@@ -17,12 +22,17 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.data.fetch().subscribe(settings => {
       this.settings = settings;
+      this.loading = false;
     });
   }
 
   onSubmit() {
+    if (!this.settings.display) {
+      this.settings.display_users = false;
+    }
     this.data.update(this.settings).then(() => {
       this.success = true;
       setTimeout(() => {

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Guest} from '../model/guest.model';
-import {SearchService} from '../services/search.service';
+import {RecordsService} from '../services/records.service';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -18,7 +18,7 @@ export class RecordsComponent implements OnInit {
   results: Observable<{ id: string, data: Guest }[]>;
   opStr = '==';
 
-  constructor(private search: SearchService) {
+  constructor(private search: RecordsService) {
   }
 
   ngOnInit() {

@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'booked', component: BookedComponent, canActivate: [AuthGuard]},
   {path: 'booked-new', component: AddBookedComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuard]},
   {path: 'records', component: RecordsComponent, canActivate: [AuthGuard]},
-  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuard]},
   {path: 'logout', component: LoginComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

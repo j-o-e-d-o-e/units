@@ -3,6 +3,7 @@ import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
 import {Guest, Status} from '../model/guest.model';
 import {Location} from '@angular/common';
+import {RecordsService} from '../services/records.service';
 
 @Component({
   selector: 'app-add',
@@ -16,7 +17,7 @@ export class AddComponent {
   error: boolean;
   time: { hour: number, minute: number };
 
-  constructor(private data: DataService, private location: Location) {
+  constructor(private data: DataService, private records: RecordsService, private location: Location) {
   }
 
   onSubmit() {
@@ -29,17 +30,25 @@ export class AddComponent {
       status: Status.arrived,
     };
     this.data.addOne('guests', guest).then(() => {
-      this.success = true;
-      setTimeout(() => {
-          this.success = false;
-          this.location.back();
-        }, 1000
-      );
+      this.records.addOne('records', guest).then(() => {
+        this.success = true;
+        setTimeout(() => {
+            this.success = false;
+            this.location.back();
+          }, 1000
+        );
+      }).catch(() => {
+        this.error = true;
+        setTimeout(() => {
+            this.error = false;
+          }, 2000
+        );
+      });
     }).catch(() => {
       this.error = true;
       setTimeout(() => {
           this.error = false;
-        }, 1000
+        }, 2000
       );
     });
   }

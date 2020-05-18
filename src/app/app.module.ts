@@ -16,7 +16,7 @@ import {SpinnerComponent} from './spinner/spinner.component';
 import {AuthGuard} from './services/auth/auth-guard.service';
 import {CanDeactivateGuard} from './services/deactive-guard.service';
 import {DataService} from './services/data.service';
-import {SearchService} from './services/search.service';
+import {RecordsService} from './services/records.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ArrivedComponent} from './arrived/arrived.component';
 import {AddComponent} from './add/add.component';
@@ -52,7 +52,7 @@ import {SettingsService} from './services/settings.service';
     AppRoutingModule,
     NgbModule
   ],
-  providers: [AuthService, AuthGuard, CanDeactivateGuard, DataService, SearchService, SettingsService],
+  providers: [AuthService, AuthGuard, CanDeactivateGuard, DataService, RecordsService, SettingsService],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })

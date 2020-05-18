@@ -1,9 +1,4 @@
-<div class="container">
-
-  <!--TODO: CanDeactiveGuard for alert "data will be lost" -->
-  <!--<div class="col-xs-10 alert alert-danger" *ngIf="user.voted && form.dirty">-->
-  <!--<p>Submit to update vote.</p>-->
-  <!--</div>-->
+<div class="container" *ngIf="!loading">
 
   <div class="row">
     <h2>Settings</h2>
@@ -33,6 +28,17 @@
       </div>
     </div>
 
+    <div class="row" *ngIf="settings.display">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="display-users">Only for admin?</label>
+          <input id="display-users" class="form-control" type="checkbox" name="display-users"
+                 [(ngModel)]="settings.display_users">
+        </div>
+      </div>
+    </div>
+
+<!--TODO: Auto-delete as cloud function in firebase not implemented, yet-->
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">

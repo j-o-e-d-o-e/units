@@ -1,14 +1,18 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Guest} from '../model/guest.model';
 import {map} from 'rxjs/operators';
 
 @Injectable()
-export class SearchService {
+export class RecordsService {
   private path = 'guests';
   private collection: AngularFirestoreCollection<Guest>;
 
   constructor(private db: AngularFirestore) {
+  }
+
+  addOne(data: string, value: Guest) {
+    return this.collection.add(value);
   }
 
   searchByOneField(field: string, value: string) {
