@@ -78,11 +78,11 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger" *ngIf="status !== 'reserved'" (click)="remove()">
-      Remove
-    </button>
     <button type="button" class="btn btn-outline-dark" *ngIf="status !== 'arrived'" (click)="arrived()">
       Arrived
+    </button>
+    <button type="button" class="btn btn-danger" (click)="remove()">
+      Remove
     </button>
     <button type="submit" class="btn btn-success" [disabled]="form.pristine">Submit</button>
     <button type="button" class="btn btn-primary" (click)="onCancel()">Cancel</button>
