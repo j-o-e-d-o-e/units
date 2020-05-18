@@ -56,7 +56,11 @@ export class AddBookedComponent implements OnInit{
   }
 
   private getDate() {
+    console.log(this.form.value.date);
     const date = new Date(this.form.value.date);
+    console.log(date);
+    console.log(this.date);
+    console.log(new Date(date.getFullYear(), date.getMonth(), date.getDate(), this.time.hour, this.time.minute).getTime());
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), this.time.hour, this.time.minute).getTime();
   }
 }

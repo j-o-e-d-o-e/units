@@ -27,10 +27,10 @@ export class ArrivedComponent implements OnInit {
 
   ngOnInit() {
     this.settings.fetch().subscribe(settings => {
-      if (this.auth.isAdmin()){
+      if (this.auth.isAdmin()) {
         this.display = settings.display;
-      }else {
-        this.display = settings.display_users;
+      } else {
+        this.display = !settings.display_admin_only;
       }
     });
     this.guests = this.data.fetchMany(Status.arrived);

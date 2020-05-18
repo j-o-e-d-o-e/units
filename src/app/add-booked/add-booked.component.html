@@ -39,7 +39,8 @@
     <div class="row">
       <div class="col-md-5">
         <label for="date">Date</label>
-        <input id="date" class="form-control" type="date" name="date" [value]="(date | date: 'yyyy-MM-dd')">
+<!--        [value]="(date | date: 'yyyy-MM-dd')" ngModel-->
+        <input id="date" class="form-control" type="date" name="date" [ngModel]="date | date: 'yyyy-MM-dd'">
         <ngb-timepicker id="time" name="time" [minuteStep]="30" [seconds]="false" [(ngModel)]="time"></ngb-timepicker>
       </div>
     </div>

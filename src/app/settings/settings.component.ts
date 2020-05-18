@@ -31,12 +31,13 @@ export class SettingsComponent implements OnInit {
 
   onSubmit() {
     if (!this.settings.display) {
-      this.settings.display_users = false;
+      this.settings.display_admin_only = false;
     }
     this.data.update(this.settings).then(() => {
       this.success = true;
       setTimeout(() => {
           this.success = false;
+          this.form.onReset();
           this.location.back();
         }, 1000
       );
