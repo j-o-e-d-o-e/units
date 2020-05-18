@@ -29,11 +29,12 @@ export class AddComponent {
       date: new Date().getTime(),
       status: Status.arrived,
     };
-    this.data.addOne('guests', guest).then(() => {
-      this.records.addOne('records', guest).then(() => {
+    this.data.addOne(guest).then(() => {
+      this.records.addOne(guest).then(() => {
         this.success = true;
         setTimeout(() => {
             this.success = false;
+            this.form.onReset();
             this.location.back();
           }, 1000
         );

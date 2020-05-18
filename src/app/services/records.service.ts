@@ -5,14 +5,14 @@ import {map} from 'rxjs/operators';
 
 @Injectable()
 export class RecordsService {
-  private path = 'guests';
+  private path = 'records';
   private collection: AngularFirestoreCollection<Guest>;
 
   constructor(private db: AngularFirestore) {
   }
 
-  addOne(data: string, value: Guest) {
-    return this.collection.add(value);
+  addOne(value: Guest) {
+    return this.db.collection(this.path).add(value);
   }
 
   searchByOneField(field: string, value: string) {

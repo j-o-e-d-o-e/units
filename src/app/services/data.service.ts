@@ -5,19 +5,20 @@ import {map} from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
+  private path = 'guests';
   private collection: AngularFirestoreCollection<Guest>;
   private doc: AngularFirestoreDocument<Guest>;
 
   constructor(private db: AngularFirestore) {
   }
 
-  fetchOne(data: string, id: string) {
-    this.doc = this.db.doc(data + '/' + id);
+  fetchOne(id: string) {
+    this.doc = this.db.doc(this.path + '/' + id);
     return this.doc.valueChanges();
   }
 
-  fetchMany(data: string, status: string) {
-    this.collection = this.db.collection(data, ref => {
+  fetchMany(status: string) {
+    this.collection = this.db.collection(this.path, ref => {
       return ref.where('status', '==', status).orderBy('date', 'desc');
     });
     return this.collection.snapshotChanges().pipe(map(resp => {
@@ -30,20 +31,20 @@ export class DataService {
     }));
   }
 
-  addOne(data: string, value: Guest) {
+  addOne(value: Guest) {
     return this.collection.add(value);
   }
 
-  updateOne(data: string, id: string, value: any) {
-    return this.db.doc(data + '/' + id).update(value);
+  updateOne(id: string, value: any) {
+    return this.db.doc(this.path + '/' + id).update(value);
   }
 
-  deleteOne(data: string, id: string) {
-    return this.db.doc(data + '/' + id).delete();
+  deleteOne(id: string) {
+    return this.db.doc(this.path + '/' + id).delete();
   }
 
   // noinspection JSUnusedGlobalSymbols FOR MOCK-DATA
-  addMany(data: string, values: Guest[]) {
+  addMany(values: Guest[]) {
     for (let value of values) {
       this.collection.add(value)
         .then(() => console.log('done.'))

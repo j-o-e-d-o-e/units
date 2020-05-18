@@ -33,7 +33,7 @@ export class ArrivedComponent implements OnInit {
         this.display = settings.display_users;
       }
     });
-    this.guests = this.data.fetchMany('guests', Status.arrived);
+    this.guests = this.data.fetchMany(Status.arrived);
   }
 
   onAdd() {
@@ -47,13 +47,13 @@ export class ArrivedComponent implements OnInit {
 
   onClear() {
     if (confirm('Clear all entries in list?')) {
-      this.data.fetchMany('guests', 'arrived').pipe(map(data => {
+      this.data.fetchMany(Status.arrived).pipe(map(data => {
         return data.map(props => {
           return props.id;
         });
       })).subscribe(ids => {
         ids.forEach((id: string, index: number, array: string[]) => {
-          this.data.deleteOne('guests', id).then();
+          this.data.deleteOne(id).then();
           if (index === array.length - 1 && this.guests.subscribe(res => res.length === 0)) {
             this.success = true;
             setTimeout(() => {

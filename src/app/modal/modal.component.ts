@@ -28,7 +28,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.guest = this.data.fetchOne('guests', this.id);
+    this.guest = this.data.fetchOne(this.id);
     this.subscription = this.guest.subscribe(g => {
       const date = new Date(g.date);
       this.time = {hour: date.getHours(), minute: date.getMinutes()};
@@ -37,10 +37,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   arrived() {
-    this.data.updateOne('guests', this.id, {
+    this.data.updateOne(this.id, {
       status: Status.arrived
     }).then(() => {
-      this.records.addOne('records', {
+      this.records.addOne({
         forename: this.form.value.forename,
         surname: this.form.value.surname,
         phone: this.form.value.phone,
@@ -51,6 +51,7 @@ export class ModalComponent implements OnInit, OnDestroy {
         this.success = true;
         setTimeout(() => {
             this.success = false;
+            this.activeModal.close('Close click');
           }, 1000
         );
       }).catch(() => {
@@ -71,7 +72,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   remove() {
     this.subscription.unsubscribe();
-    this.data.deleteOne('guests', this.id).then(() => {
+    this.data.deleteOne(this.id).then(() => {
       this.success = true;
       setTimeout(() => {
           this.success = false;
@@ -88,7 +89,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.data.updateOne('guests', this.id, {
+    this.data.updateOne(this.id, {
       forename: this.form.value.forename,
       surname: this.form.value.surname,
       phone: this.form.value.phone,
@@ -99,6 +100,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.success = true;
       setTimeout(() => {
           this.success = false;
+          this.form.onReset();
           this.activeModal.close('Close click');
         }, 1000
       );

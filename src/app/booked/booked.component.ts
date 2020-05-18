@@ -21,7 +21,7 @@ export class BookedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.guests = this.data.fetchMany('guests', Status.booked);
+    this.guests = this.data.fetchMany(Status.booked);
   }
 
   onAdd() {
@@ -35,13 +35,13 @@ export class BookedComponent implements OnInit {
 
   onClear() {
     if (confirm('Clear all entries in list?')) {
-      this.data.fetchMany('guests', 'booked').pipe(map(data => {
+      this.data.fetchMany(Status.booked).pipe(map(data => {
         return data.map(props => {
           return props.id;
         });
       })).subscribe(ids => {
         ids.forEach((id: string, index: number, array: string[]) => {
-          this.data.deleteOne('guests', id).then();
+          this.data.deleteOne(id).then();
           if (index === array.length - 1 && this.guests.subscribe(res => res.length === 0)) {
             this.success = true;
             setTimeout(() => {
@@ -62,13 +62,13 @@ export class BookedComponent implements OnInit {
 
   onArrived() {
     if (confirm('Move all entries to arrived?')) {
-      this.data.fetchMany('guests', 'booked').pipe(map(data => {
+      this.data.fetchMany(Status.booked).pipe(map(data => {
         return data.map(props => {
           return props.id;
         });
       })).subscribe(ids => {
         ids.forEach((id: string, index: number, array: string[]) => {
-          this.data.updateOne('guests', id, {status: Status.arrived}).then();
+          this.data.updateOne(id, {status: Status.arrived}).then();
           if (index === array.length - 1 && this.guests.subscribe(res => res.length === 0)) {
             this.success = true;
             setTimeout(() => {

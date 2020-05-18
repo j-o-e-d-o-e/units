@@ -34,10 +34,11 @@ export class AddBookedComponent implements OnInit{
       date: this.getDate(),
       status: Status.booked,
     };
-    this.data.addOne('guests', guest).then(() => {
+    this.data.addOne(guest).then(() => {
       this.success = true;
       setTimeout(() => {
           this.success = false;
+          this.form.onReset();
           this.location.back();
         }, 1000
       );
