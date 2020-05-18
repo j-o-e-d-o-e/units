@@ -49,17 +49,6 @@
 
     <div class="row">
       <div class="col-md-5">
-        <p>Status</p>
-        <label class="radio" *ngFor="let value of ['arrived', 'booked']">
-          <input type="radio" name="status" [value]="true" [checked]="(guest | async)?.status === value"
-                 [ngModel]="status">
-          <span class="radio-span"> {{value}} </span>
-        </label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-5">
         <div class="form-group">
           <label for="phone">Phone</label>
           <input id="phone" class="form-control" type="text" name="phone" [ngModel]="(guest | async)?.phone">
