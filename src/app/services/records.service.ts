@@ -43,7 +43,7 @@ export class RecordsService {
   searchByDay(date: number) {
     this.collection = this.db.collection(this.path, ref => {
       return ref.where('date', '>=', date)
-        .where('date', '<=', date + 24 * 60 * 60)
+        .where('date', '<=', date + 24 * 60 * 60 * 1000)
         .orderBy('date', 'desc');
     });
     return this.data();
