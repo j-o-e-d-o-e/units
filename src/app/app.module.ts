@@ -22,7 +22,6 @@ import {ArrivedComponent} from './arrived/arrived.component';
 import {AddComponent} from './add/add.component';
 import { ModalComponent } from './modal/modal.component';
 import { BookedComponent } from './booked/booked.component';
-import { AddBookedComponent } from './add-booked/add-booked.component';
 import { RecordsComponent } from './records/records.component';
 import { SettingsComponent } from './settings/settings.component';
 import {SettingsService} from './services/settings.service';
@@ -37,7 +36,6 @@ import {SettingsService} from './services/settings.service';
     AddComponent,
     ModalComponent,
     BookedComponent,
-    AddBookedComponent,
     RecordsComponent,
     SettingsComponent,
   ],

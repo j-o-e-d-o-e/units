@@ -25,7 +25,7 @@ export class BookedComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['/booked-new']).catch();
+    this.router.navigate(['/add', Status.booked]).catch();
   }
 
   onEdit(id: string) {

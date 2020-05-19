@@ -37,7 +37,7 @@ export class ArrivedComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['/arrived-new']).catch();
+    this.router.navigate(['/add', Status.arrived]).catch();
   }
 
   onEdit(id: string) {

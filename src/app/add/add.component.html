@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <h2>New Guest arriving</h2>
+    <h2>New Guest ({{status}})</h2>
   </div>
 
   <div class="row" *ngIf="success">
@@ -33,6 +33,14 @@
           <label for="surname">Surname</label>
           <input id="surname" class="form-control" type="text" name="surname" ngModel>
         </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="status === 'booked'">
+      <div class="col-md-5">
+        <label for="date">Date</label>
+        <input id="date" class="form-control" type="date" name="date" [ngModel]="date | date: 'yyyy-MM-dd'">
+        <ngb-timepicker id="time" name="time" [minuteStep]="30" [seconds]="false" [(ngModel)]="time"></ngb-timepicker>
       </div>
     </div>
 
