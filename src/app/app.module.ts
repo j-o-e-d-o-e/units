@@ -18,12 +18,11 @@ import {CanDeactivateGuard} from './services/deactive-guard.service';
 import {DataService} from './services/data.service';
 import {RecordsService} from './services/records.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ArrivedComponent} from './arrived/arrived.component';
+import {ListComponent} from './list/list.component';
 import {AddComponent} from './add/add.component';
-import { ModalComponent } from './modal/modal.component';
-import { BookedComponent } from './booked/booked.component';
-import { RecordsComponent } from './records/records.component';
-import { SettingsComponent } from './settings/settings.component';
+import {ModalComponent} from './modal/modal.component';
+import {RecordsComponent} from './records/records.component';
+import {SettingsComponent} from './settings/settings.component';
 import {SettingsService} from './services/settings.service';
 
 @NgModule({
@@ -32,10 +31,9 @@ import {SettingsService} from './services/settings.service';
     HeaderComponent,
     LoginComponent,
     SpinnerComponent,
-    ArrivedComponent,
+    ListComponent,
     AddComponent,
     ModalComponent,
-    BookedComponent,
     RecordsComponent,
     SettingsComponent,
   ],

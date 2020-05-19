@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth/auth.service';
+import {Status} from '../model/guest.model';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
     password = this.form.value.password;
     this.auth.login(mail, password).then(
       () => {
-        this.router.navigate(['/arrived']).catch();
+        this.router.navigate(['/list', Status.arrived]).catch();
       },
       () => {
         this.error = true;

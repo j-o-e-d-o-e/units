@@ -14,14 +14,14 @@
 
   <div class="row btn-toolbar">
     <div class="mr-auto">
-      <h2>Arrived: {{(guests| async)?.length}}</h2>
+      <h2>{{status | uppercase}}: {{(guests| async)?.length}}</h2>
     </div>
     <div class="ml-auto">
       <button type="submit" class="btn btn-success" (click)="onAdd()">Add</button>
     </div>
   </div>
 
-  <ng-container *ngIf="display">
+  <ng-container *ngIf="status === 'booked' || display">
 
     <div class="row">
       <div class="col">
@@ -56,6 +56,9 @@
     <div class="row">
       <div class="col">
         <button type="button" class="btn btn-danger" (click)="onClear()">Clear all</button>
+        <button type="button" class="btn btn-outline-dark" *ngIf="status === 'booked'" (click)="onArrived()">
+          Arrive all
+        </button>
       </div>
     </div>
 
