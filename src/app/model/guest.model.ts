@@ -10,5 +10,4 @@ export interface Guest {
 export enum Status {
   booked = 'booked',
   arrived = 'arrived',
-  left = 'left'
 }
