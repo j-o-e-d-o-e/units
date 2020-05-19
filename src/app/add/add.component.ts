@@ -26,7 +26,7 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.status = this.route.snapshot.params.status == Status.arrived ? Status.arrived : Status.booked;
-    if (status === Status.booked) {
+    if (this.status === Status.booked) {
       this.date = new Date();
       this.time = {hour: this.date.getHours(), minute: this.date.getMinutes()};
     }
