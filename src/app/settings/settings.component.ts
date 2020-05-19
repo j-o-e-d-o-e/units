@@ -38,7 +38,6 @@ export class SettingsComponent implements OnInit {
       setTimeout(() => {
           this.success = false;
           this.form.onReset();
-          this.location.back();
         }, 1000
       );
     }).catch(() => {
