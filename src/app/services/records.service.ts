@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {Guest} from '../model/guest.model';
+import {Record} from '../model/record.model';
 import {map} from 'rxjs/operators';
 
 @Injectable()
 export class RecordsService {
   private path = 'records';
-  private collection: AngularFirestoreCollection<Guest>;
+  private collection: AngularFirestoreCollection<Record>;
 
   constructor(private db: AngularFirestore) {
   }
 
-  addOne(value: Guest) {
+  addOne(value: Record) {
     return this.db.collection(this.path).add(value);
   }
 

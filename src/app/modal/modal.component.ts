@@ -45,8 +45,7 @@ export class ModalComponent implements OnInit, OnDestroy {
         surname: this.form.value.surname,
         phone: this.form.value.phone,
         friends: +this.form.value.friends,
-        date: this.date(),
-        status: this.status
+        date: this.date()
       }).then(() => {
         this.success = true;
         setTimeout(() => {
