@@ -10,6 +10,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Live demo
 
-Published on [GithubPages](https://j-o-e-d-o-e.github.io/ng_units/). Logins: 
+Published on [GithubPages](https://j-o-e-d-o-e.github.io/units/). Logins: 
 - user@test.net/test123
 - admin@test.net/test123
